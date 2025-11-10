@@ -369,32 +369,191 @@ behave --dry-run
 
 ---
 
-## Part 10: Exercise - Try It Yourself!
+## Part 10: COMPREHENSIVE BEGINNER EXERCISE
 
-Now it's your turn! Add a division feature:
+### Exercise: Create a Temperature Converter
 
-1. Add this scenario to `calculator.feature`:
-
-```gherkin
-    Scenario: Divide two numbers
-        Given I have a calculator
-        When I divide 20 by 5
-        Then the result should be 4
-```
-
-2. Add the step definition to `calculator_steps.py`:
-
-```python
-@when('I divide {num1:d} by {num2:d}')
-def step_when_divide(context, num1, num2):
-    context.result = context.calculator.divide(num1, num2)
-```
-
-3. Run `behave` and verify it passes!
+In this exercise, you'll create a complete Behave test project for a **Temperature Converter** that converts between Celsius, Fahrenheit, and Kelvin.
 
 ---
 
-## Troubleshooting
+### ✏️ Your Task
+
+Create a complete working Behave project with the following requirements:
+
+#### 1. Create Feature File
+
+Create `features/temperature_converter.feature` with **at least 4 scenarios** covering:
+- Convert Celsius to Fahrenheit
+- Convert Fahrenheit to Celsius
+- Convert Celsius to Kelvin
+- At least one edge case (e.g., absolute zero, negative temperatures)
+
+**Example format to guide you** (but expand on this):
+```gherkin
+Feature: Temperature Converter
+    As a user
+    I want to convert between temperature scales
+    So that I can work with different temperature units
+
+    Scenario: Convert 0 Celsius to Fahrenheit
+        Given I have a temperature converter
+        When I convert 0 degrees Celsius to Fahrenheit
+        Then the result should be 32 degrees Fahrenheit
+```
+
+#### 2. Create Implementation Class
+
+Create `temperature_converter.py` with a class that:
+- Has methods to convert between Celsius, Fahrenheit, and Kelvin
+- Handles edge cases appropriately
+- Stores the last conversion result
+
+**Example structure**:
+```python
+class TemperatureConverter:
+    def celsius_to_fahrenheit(self, celsius):
+        # Implementation here
+        pass
+    
+    def fahrenheit_to_celsius(self, fahrenheit):
+        # Implementation here
+        pass
+    
+    def celsius_to_kelvin(self, celsius):
+        # Implementation here
+        pass
+```
+
+#### 3. Create Step Definitions
+
+Create `features/steps/temperature_steps.py` with step implementations for:
+- Initializing the converter (`@given`)
+- Performing conversions (`@when`)
+- Verifying results (`@then`)
+
+#### 4. Run Your Tests
+
+Execute your test suite:
+```bash
+behave
+```
+
+**All scenarios must pass** before submission.
+
+---
+
+### 📋 Submission Checklist
+
+Please verify your work against these criteria before submitting:
+
+#### ✅ Project Structure
+- [ ] Project folder name is appropriate (e.g., `temperature_converter_bdd`)
+- [ ] Folder structure exactly matches requirements:
+  ```
+  project/
+  ├── temperature_converter.py
+  └── features/
+      ├── temperature_converter.feature
+      └── steps/
+          └── temperature_steps.py
+  ```
+- [ ] No extra unnecessary files or folders in the project root
+
+#### ✅ Feature File Quality
+- [ ] Feature file uses proper Gherkin syntax
+- [ ] At least 4 distinct scenarios are present
+- [ ] Each scenario has Given-When-Then structure in correct order[6]
+- [ ] Scenarios test different use cases (not just variations of same test)
+- [ ] Scenario titles are descriptive and clear
+- [ ] No procedure-driven imperative steps (use declarative language)[6]
+- [ ] Feature description explains the "As a..., I want..., So that..." perspective[6][79]
+
+#### ✅ Calculator/Converter Class
+- [ ] Class is properly defined with clear method names
+- [ ] All conversion methods are implemented
+- [ ] Methods return correct numerical results
+- [ ] Edge cases are handled appropriately (negative numbers, extreme values)
+- [ ] No syntax errors when importing the class
+
+#### ✅ Step Definitions
+- [ ] All step functions use correct decorators (@given, @when, @then)
+- [ ] Step function names match the feature file text exactly
+- [ ] Steps are parameterized using `{value:type}` syntax correctly
+- [ ] Context object is used properly to share data between steps[21]
+- [ ] Assertions use clear, meaningful error messages
+- [ ] All undefined steps are implemented (no cyan/blue steps in output)
+
+#### ✅ Test Execution
+- [ ] Running `behave` shows all scenarios passed
+- [ ] Output shows "0 failed" results
+- [ ] No errors or exceptions during execution
+- [ ] Test output is clean and shows proper formatting
+
+#### ✅ Code Quality
+- [ ] Python code follows basic style guidelines
+- [ ] Variable names are meaningful and consistent
+- [ ] Comments explain complex logic (if needed)
+- [ ] No hardcoded test data (use parameters instead)
+- [ ] Code is readable and maintainable
+
+#### ✅ BDD Best Practices[6][79][81]
+- [ ] Scenarios are concise and focused on single behaviors
+- [ ] No unnecessary implementation details in feature file
+- [ ] Steps are reusable (not too specific or too generic)
+- [ ] Language is user-focused, not technical
+- [ ] Scenarios could be read by non-technical stakeholders
+
+---
+
+### 🎯 Submission Requirements
+
+Submit the following:
+
+1. **Complete project folder** with all files properly organized
+2. **Output screenshot** showing all tests passing
+3. **Feature file contents** (paste the feature file text)
+4. **Implementation class** (paste the converter class code)
+5. **Step definitions** (paste the step definitions code)
+
+OR
+
+Submit as a **ZIP file** containing the complete working project.
+
+---
+
+### ❓ Common Questions
+
+**Q: Can I use an online calculator or existing code?**
+A: This is a learning exercise. You should write the converter yourself, but you can verify calculations with an online tool.
+
+**Q: How many scenarios are enough?**
+A: Minimum 4, but more shows deeper understanding. Aim for 5-6 covering various cases.
+
+**Q: Do I need to add Scenario Outlines?**
+A: Not required for this exercise, but using them shows advanced understanding.
+
+**Q: What if my conversion math is slightly off?**
+A: Use rounding in your assertions: `assert abs(result - expected) < 0.01`
+
+**Q: Can I share code with classmates?**
+A: No, this is individual assessment. However, discussing the approach is fine.
+
+---
+
+### 🚀 How to Submit
+
+Prepare your submission by:
+
+1. **Verify all tests pass**: Run `behave -v` and capture the output
+2. **Collect all files**: Feature file, implementation class, step definitions
+3. **Create ZIP file** with complete project structure
+4. **Include README** with instructions to run the tests
+5. **Submit** through Brightspace
+
+---
+
+## Part 11: Troubleshooting
 
 **Problem: "ImportError: No module named behave"**
 - Solution: Make sure you installed behave with `pip install behave`
@@ -405,34 +564,60 @@ def step_when_divide(context, num1, num2):
 **Problem: Steps showing as "undefined"**
 - Solution: Check that your step definitions exactly match the text in your feature file[21]
 
-**Problem: "ModuleNotFoundError: No module named 'calculator'"**
-- Solution: Make sure `calculator.py` is in your project root directory, not inside the `features` folder
+**Problem: "ModuleNotFoundError: No module named 'temperature_converter'"**
+- Solution: Make sure `temperature_converter.py` is in your project root directory, not inside the `features` folder
+
+**Problem: "AssertionError: Expected X but got Y"**
+- Solution: Check your conversion formulas. Verify calculations manually first.
+
+**Problem: Steps not being recognized by Behave**
+- Solution: Ensure your step definition file is in `features/steps/` and the decorator text matches your feature file exactly
 
 ---
 
-## Summary
+## Summary: What You've Learned
 
-In this practical, you learned:
-
-1. ✅ What BDD and Behave are
-2. ✅ How to install and configure Behave in VS Code
-3. ✅ The required project structure for Behave
-4. ✅ How to write feature files using Gherkin syntax
-5. ✅ How to implement step definitions in Python
-6. ✅ How to run tests using multiple methods
-7. ✅ How to use Scenario Outlines for data-driven testing
-8. ✅ How to debug Behave tests in VS Code
+✅ What BDD and Behave are and why they're valuable
+✅ How to install and configure Behave in VS Code
+✅ The required project structure for Behave projects
+✅ How to write feature files using Gherkin syntax
+✅ How to implement step definitions in Python
+✅ How to run tests using multiple methods
+✅ How to use Scenario Outlines for data-driven testing
+✅ How to debug Behave tests in VS Code
+✅ **How to build a complete working Behave project from scratch**
 
 ---
 
-## Next Steps
+## Next Steps After Completing the Exercise
 
-To continue learning Behave:
+Once you've successfully completed the temperature converter exercise:
 
-1. Explore the `environment.py` file for setup and teardown hooks
-2. Learn about tags to organize and selectively run tests
-3. Try integrating Behave with Selenium for web testing
-4. Explore different step matchers (parse, re, cfparse)
-5. Read the official documentation at https://behave.readthedocs.io/
+1. **Review feedback** and understand areas for improvement
+2. **Explore the intermediate practical** for advanced concepts
+3. **Try adding more features** like error handling and rounding options
+4. **Integrate with a real application** - create a CLI tool that uses your converter
+5. **Share your project** with others and get code review feedback
+6. **Read the official documentation** at https://behave.readthedocs.io/
 
-Happy Testing! 🎉
+---
+
+## References
+
+[1] https://behave.readthedocs.io/
+[2] https://qxf2.com/ - VS Code Behave execution
+[3] https://browserstack.com/ - Gherkin guide
+[4] https://techlistic.com/ - BDD with Behave
+[6] https://automationpanda.com/ - Writing Good Gherkin
+[8] VS Code Behave Extension
+[13] https://lambdatest.com/ - Behave tutorial
+[15] https://accelq.com/ - Format and syntax
+[21] https://behave.readthedocs.io/en/latest/ - Tutorial
+[22] https://automationpanda.com/ - Python Testing 101
+[28] Behave examples
+[37] https://behave.readthedocs.io/en/latest/install.html
+[42] https://behave.readthedocs.io/en/latest/step_matchers.html
+[79] https://lambdatest.com/ - BDD Complete Guide
+[81] https://accelq.com/ - BDD Testing
+
+Happy Learning and Testing! 🎓✅
